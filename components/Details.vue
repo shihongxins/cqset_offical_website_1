@@ -1,35 +1,44 @@
-<script setup>
-const props = defineProps({
-  open: Boolean,
-  icon: {
-    type: Boolean,
-    default: true,
-  },
-  summary: String,
-  content: String
+<script lang="ts" setup>
+const props = withDefaults(
+  defineProps<{
+    open?: boolean;
+    icon?: boolean;
+    summary?: string;
+    content?: string;
+  }>(), {
+  icon: true,
 });
 const emit = defineEmits(['update:open', 'toggle']);
-
+const _state = ref(props.open);
+const state = computed({
+  get: () => {
+    return _state.value || props.open || null;
+  },
+  set: (newState) => {
+    _state.value = Boolean(newState);
+    emit('update:open', newState);
+    emit('toggle', newState);
+  }
+});
 const toggleDetails = () => {
-  emit('update:open', !props.open);
-  emit('toggle');
+  _state.value = !state.value;
 }
 </script>
 
 <template>
-  <details class="details" :open="open">
-    <summary class="details__summary" @click="toggleDetails">
+  <div class="details" :open="state">
+    <div class="details__summary" @click="toggleDetails">
       <slot name="summary">{{ summary }}</slot>
       <div class="details__icon" v-if="icon">
         <slot name="icon">
-          <span></span>
+          <i></i>
         </slot>
       </div>
-    </summary>
+    </div>
     <div class="details__content">
       <slot>{{ content }}</slot>
     </div>
-  </details>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -44,10 +53,11 @@ const toggleDetails = () => {
   }
 
   &__icon {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin-left: auto;
 
-    >span {
+    >i {
       display: inline-block;
       padding: 0.5rem;
       width: 1rem;
@@ -81,11 +91,11 @@ const toggleDetails = () => {
     padding: 0.5rem;
     max-height: 0px;
     overflow: hidden;
-    transition: max-height 3s ease-out;
+    transition: max-height .5s ease-out;
   }
 
   &[open] {
-    .details__icon>span {
+    .details__icon>i {
       transform: rotate(180deg);
 
       &::after {

@@ -37,11 +37,22 @@
     }
 
     .title {
+      display: none;
       font-weight: 600;
       letter-spacing: 0.1rem;
       font-size: 1.25rem;
       white-space: nowrap;
       @apply text-blue-800;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__wrapper {
+    .header {
+      .title {
+        display: block;
+      }
     }
   }
 }

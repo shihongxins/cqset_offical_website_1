@@ -5,14 +5,12 @@ const navState = ref('closed');
 const toggleNav = () => {
   navState.value = navState.value === 'open' ? 'closed' : 'open';
 }
-const isMobile = useMediaQuery('(max-width: 768px)');
-
 const navClass = computed(() => {
   return {
     'nav--open': navState.value === 'open',
-    'is-mobile': isMobile.value,
   }
 });
+const isMobile = useMediaQuery('(max-width: 768px)');
 
 </script>
 
@@ -20,7 +18,16 @@ const navClass = computed(() => {
   <nav class="nav" :class="navClass">
     <ul class="nav__list">
       <li class="nav__list__item">
-        <NuxtLink to="/products">产品中心</NuxtLink>
+        <Details :icon="isMobile">
+          <template v-slot:summary>
+            <NuxtLink to="/products">产品中心</NuxtLink>
+          </template>
+          <ul class="nav__list direction--column">
+            <li class="nav__list__item">
+              <NuxtLink to="/products#1">产品1</NuxtLink>
+            </li>
+          </ul>
+        </Details>
       </li>
       <li class="nav__list__item">
         <NuxtLink to="/news">新闻资讯</NuxtLink>
@@ -32,13 +39,13 @@ const navClass = computed(() => {
           </template>
           <ul class="nav__list direction--column">
             <li class="nav__list__item">
-              <NuxtLink to="/aboutus/#/公司简介">公司简介</NuxtLink>
+              <NuxtLink to="/aboutus#公司简介">公司简介</NuxtLink>
             </li>
             <li class="nav__list__item">
-              <NuxtLink to="/aboutus/#/联系我们">联系我们</NuxtLink>
+              <NuxtLink to="/aboutus#联系我们">联系我们</NuxtLink>
             </li>
             <li class="nav__list__item">
-              <NuxtLink to="/aboutus/#/意见建议">意见建议</NuxtLink>
+              <NuxtLink to="/aboutus#意见建议">意见建议</NuxtLink>
             </li>
           </ul>
         </Details>
@@ -51,7 +58,6 @@ const navClass = computed(() => {
 
 <style lang="scss" scoped>
 .nav {
-  align-self: flex-start;
   display: flex;
 
   &__list {
@@ -67,11 +73,16 @@ const navClass = computed(() => {
     &__item {
       padding: 0 0.5rem;
 
-      a {
+      :deep(a) {
         height: 4rem;
         line-height: 4rem;
         padding: 0 1rem;
         white-space: nowrap;
+
+        &:hover,
+        &.router-link-active {
+          @apply text-sky-600;
+        }
       }
 
       .details {
@@ -83,14 +94,41 @@ const navClass = computed(() => {
         }
       }
 
+      position: relative;
+
+      .nav__list {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        transition: all 0.3s ease-in-out;
+
+        &,
+        & a {
+          @apply text-slate-50;
+
+          &:hover {
+            @apply text-sky-600;
+          }
+        }
+      }
+
+      &:hover {
+        .nav__list {
+          top: 100%;
+          transform: translate(-50%, 0);
+        }
+      }
     }
   }
 
   &__hamburger {
     display: none;
   }
+}
 
-  &.is-mobile {
+@media screen and (max-width: 768px) {
+  .nav {
     align-self: center;
     justify-content: center;
 
@@ -100,8 +138,13 @@ const navClass = computed(() => {
       .nav__list__item {
         display: flex;
 
-        &>a {
+        a {
           flex: 1;
+        }
+
+        .nav__list {
+          position: static;
+          transform: none;
         }
       }
     }
@@ -112,10 +155,13 @@ const navClass = computed(() => {
     }
 
     &.nav--open {
-      >.nav__list {
+      .nav__list {
         display: flex;
         flex-flow: column nowrap;
         align-items: stretch;
+      }
+
+      >.nav__list {
         position: fixed;
         top: 64px;
         left: 0;
