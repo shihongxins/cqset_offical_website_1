@@ -9,88 +9,91 @@ onBeforeUnmount(() => {
 
 <template>
   <footer class="footer">
-    <div class="links__layout">
-      <CompDetails class="links__group" :open="linksGroupInitState">
-        <template v-slot:summary>
-          <h6>产品中心</h6>
-        </template>
-        <ul class="links__list">
-          <li class="links__item">
-            <a href="/products#智慧电网机器人">智慧电网机器人</a>
-          </li>
-          <li class="links__item">
-            <a href="/products#物联网系列">物联网系列</a>
-          </li>
-          <li class="links__item">
-            <a href="/products#输变配电故障预警系列">输变配电故障预警系列</a>
-          </li>
-          <li class="links__item">
-            <a href="/products#无人机搭载系列">无人机搭载系列</a>
-          </li>
-          <li class="links__item">
-            <a href="/products#其他">其他</a>
-          </li>
-        </ul>
-      </CompDetails>
-      <CompDetails class="links__group" :open="linksGroupInitState">
-        <template v-slot:summary>
-          <h6>新闻资讯</h6>
-        </template>
-        <ul class="links__list">
-          <li class="links__item">
-            <a href="/news#公司新闻">公司新闻</a>
-          </li>
-          <li class="links__item">
-            <a href="/news#内容管理">内容管理</a>
-          </li>
-        </ul>
-      </CompDetails>
-      <CompDetails class="links__group" :open="linksGroupInitState">
-        <template v-slot:summary>
-          <h6>关于我们</h6>
-        </template>
-        <ul class="links__list">
-          <li class="links__item">
-            <a href="/aboutus#公司简介">公司简介</a>
-          </li>
-        </ul>
-      </CompDetails>
-      <CompDetails class="links__group" :open="linksGroupInitState">
-        <template v-slot:summary>
-          <h6>联系我们</h6>
-        </template>
-        <ul class="links__list">
-          <li class="links__item">
-            <a href="tel:+86 023-67652845">023-67652845</a>
-          </li>
-          <li class="links__item">
-            <a href="https://map.baidu.com/search/@11868070.3,3434963.955,19z?querytype=s&wd=%E9%87%8D%E5%BA%86%E5%8D%97%E7%94%B5%E7%A7%91%E6%8A%80%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8"
-              target="_blank">
-              <address>
-                重庆市江北区港安二路48号总部大楼 2，3 楼
-              </address>
-            </a>
-          </li>
-        </ul>
-      </CompDetails>
+    <div class="footer__layout container container--large">
+      <div class="links__layout">
+        <CompDetails class="links__group" :open="linksGroupInitState">
+          <template v-slot:summary>
+            <h6>产品中心</h6>
+          </template>
+          <ul class="links__list">
+            <li class="links__item">
+              <a href="/products#智慧电网机器人">智慧电网机器人</a>
+            </li>
+            <li class="links__item">
+              <a href="/products#物联网系列">物联网系列</a>
+            </li>
+            <li class="links__item">
+              <a href="/products#输变配电故障预警系列">输变配电故障预警系列</a>
+            </li>
+            <li class="links__item">
+              <a href="/products#无人机搭载系列">无人机搭载系列</a>
+            </li>
+            <li class="links__item">
+              <a href="/products#其他">其他</a>
+            </li>
+          </ul>
+        </CompDetails>
+        <CompDetails class="links__group" :open="linksGroupInitState">
+          <template v-slot:summary>
+            <h6>新闻资讯</h6>
+          </template>
+          <ul class="links__list">
+            <li class="links__item">
+              <a href="/news#公司新闻">公司新闻</a>
+            </li>
+            <li class="links__item">
+              <a href="/news#内容管理">内容管理</a>
+            </li>
+          </ul>
+        </CompDetails>
+        <CompDetails class="links__group" :open="linksGroupInitState">
+          <template v-slot:summary>
+            <h6>关于我们</h6>
+          </template>
+          <ul class="links__list">
+            <li class="links__item">
+              <a href="/aboutus#公司简介">公司简介</a>
+            </li>
+          </ul>
+        </CompDetails>
+        <CompDetails class="links__group" :open="linksGroupInitState">
+          <template v-slot:summary>
+            <h6>联系我们</h6>
+          </template>
+          <ul class="links__list">
+            <li class="links__item">
+              <a href="tel:+86 023-67652845">023-67652845</a>
+            </li>
+            <li class="links__item">
+              <a href="https://map.baidu.com/search/@11868070.3,3434963.955,19z?querytype=s&wd=%E9%87%8D%E5%BA%86%E5%8D%97%E7%94%B5%E7%A7%91%E6%8A%80%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8"
+                target="_blank">
+                <address>
+                  重庆市江北区港安二路48号总部大楼 2，3 楼
+                </address>
+              </a>
+            </li>
+          </ul>
+        </CompDetails>
+      </div>
+      <p class="copyright">
+        <span>
+          版权所有：
+        </span>
+        <a href="//www.cqset.com" title="重庆南电科技股份有限公司">
+          重庆南电科技股份有限公司
+        </a>
+        <span>
+          Copyright &copy; {{ currentYear }}
+        </span>
+        <a target="_blank" href="//beian.miit.gov.cn/#/Integrated/index">
+          渝ICP备16002017号-1
+        </a>
+      </p>
+      <small class="visitor">
+        网站访问量：{{ 183744 }} 人/次
+      </small>
     </div>
-    <p class="copyright">
-      <span>
-        版权所有：
-      </span>
-      <a href="//www.cqset.com" title="重庆南电科技股份有限公司">
-        重庆南电科技股份有限公司
-      </a>
-      <span>
-        Copyright &copy; {{ currentYear }}
-      </span>
-      <a target="_blank" href="//beian.miit.gov.cn/#/Integrated/index">
-        渝ICP备16002017号-1
-      </a>
-    </p>
-    <small class="visitor">
-      网站访问量：{{ 183744 }} 人/次
-    </small>
+
   </footer>
 </template>
 

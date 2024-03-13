@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="header__layout">
+    <div class="header__layout container container--large">
       <NuxtLink to="/" class="h-8 flex items-center">
         <img class="logo" alt="logo"
           srcset="https://www.cqset.com/uploads/129d018a2bedce166915bb1b71bf8cfd_20240305165703.png 180w,https://www.cqset.com/uploads/138db59c896b7ebcaf7206219dd3afc9_20240305165703.png"
@@ -18,14 +18,10 @@
 <style lang="scss" scoped>
 .header {
   padding: 0 1rem;
-  height: 4rem;
   @apply bg-stone-950;
 
   .header__layout {
-    margin: auto;
-    width: 100%;
-    max-width: 1440px;
-    height: 100%;
+    height: 4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;

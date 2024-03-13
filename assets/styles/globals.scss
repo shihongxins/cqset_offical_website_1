@@ -7,4 +7,18 @@ body {
 a {
   display: inline-block;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    filter: brightness(80%);
+  }
+}
+
+
+.container {
+  margin: 0 auto;
+  max-width: 960px;
+  &--large {
+    max-width: 1440px;
+  }
 }
