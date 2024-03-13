@@ -1,6 +1,4 @@
 <script setup>
-import { useMediaQuery } from "@vueuse/core";
-
 const navState = ref('closed');
 const toggleNav = () => {
   navState.value = navState.value === 'open' ? 'closed' : 'open';
@@ -10,7 +8,10 @@ const navClass = computed(() => {
     'nav--open': navState.value === 'open',
   }
 });
-const isMobile = useMediaQuery('(max-width: 768px)');
+const { state: showNavIcon, unWatch } = useIsMobileState();
+onUnmounted(() => {
+  unWatch();
+});
 
 </script>
 
@@ -18,7 +19,7 @@ const isMobile = useMediaQuery('(max-width: 768px)');
   <nav class="nav" :class="navClass">
     <ul class="nav__list">
       <li class="nav__list__item">
-        <Details :icon="isMobile">
+        <CompDetails :icon="showNavIcon">
           <template v-slot:summary>
             <NuxtLink to="/products">产品中心</NuxtLink>
           </template>
@@ -27,13 +28,13 @@ const isMobile = useMediaQuery('(max-width: 768px)');
               <NuxtLink to="/products#1">产品1</NuxtLink>
             </li>
           </ul>
-        </Details>
+        </CompDetails>
       </li>
       <li class="nav__list__item">
         <NuxtLink to="/news">新闻资讯</NuxtLink>
       </li>
       <li class="nav__list__item">
-        <Details :icon="isMobile">
+        <CompDetails :icon="showNavIcon">
           <template v-slot:summary>
             <NuxtLink to="/aboutus">关于我们</NuxtLink>
           </template>
@@ -48,7 +49,7 @@ const isMobile = useMediaQuery('(max-width: 768px)');
               <NuxtLink to="/aboutus#意见建议">意见建议</NuxtLink>
             </li>
           </ul>
-        </Details>
+        </CompDetails>
       </li>
     </ul>
     <UButton class="nav__hamburger" :icon="navState === 'closed' ? 'i-heroicons-bars-3' : 'i-heroicons-x-mark'"
@@ -166,6 +167,7 @@ const isMobile = useMediaQuery('(max-width: 768px)');
         top: 64px;
         left: 0;
         right: 0;
+        z-index: 99;
         width: 100%;
         overflow: hidden;
       }

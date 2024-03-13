@@ -1,5 +1,5 @@
 <template>
-  <Header></Header>
+  <PageHeader></PageHeader>
   <slot></slot>
-  <Footer></Footer>
+  <PageFooter></PageFooter>
 </template>

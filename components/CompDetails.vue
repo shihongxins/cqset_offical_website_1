@@ -21,8 +21,9 @@ const state = computed({
   }
 });
 const toggleDetails = () => {
-  _state.value = !state.value;
+  state.value = !(state.value) || null;
 }
+
 </script>
 
 <template>
@@ -44,6 +45,7 @@ const toggleDetails = () => {
 <style lang="scss" scoped>
 .details {
   padding: 0.5rem;
+  background: inherit;
 
   &__summary {
     display: flex;
@@ -88,7 +90,6 @@ const toggleDetails = () => {
   }
 
   &__content {
-    padding: 0.5rem;
     max-height: 0px;
     overflow: hidden;
     transition: max-height .5s ease-out;

@@ -1,6 +1,6 @@
 <template>
-  <div class="header__wrapper">
-    <header class="header">
+  <header class="header">
+    <div class="header__layout">
       <NuxtLink to="/" class="h-8 flex items-center">
         <img class="logo" alt="logo"
           srcset="https://www.cqset.com/uploads/129d018a2bedce166915bb1b71bf8cfd_20240305165703.png 180w,https://www.cqset.com/uploads/138db59c896b7ebcaf7206219dd3afc9_20240305165703.png"
@@ -10,18 +10,18 @@
           重庆南电科技
         </h1>
       </NuxtLink>
-      <Navigation></Navigation>
-    </header>
-  </div>
+      <HeaderNav></HeaderNav>
+    </div>
+  </header>
 </template>
 
 <style lang="scss" scoped>
-.header__wrapper {
+.header {
   padding: 0 1rem;
   height: 4rem;
   @apply bg-stone-950;
 
-  .header {
+  .header__layout {
     margin: auto;
     width: 100%;
     max-width: 1440px;
@@ -48,8 +48,8 @@
 }
 
 @media screen and (max-width: 768px) {
-  .header__wrapper {
-    .header {
+  .header {
+    .header__layout {
       .title {
         display: block;
       }
