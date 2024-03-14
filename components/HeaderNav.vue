@@ -12,7 +12,7 @@ const { state: showNavIcon, unWatch } = useIsMobileState();
 onUnmounted(() => {
   unWatch();
 });
-
+const stateProductCategories = useProductCategories();
 </script>
 
 <template>
@@ -24,8 +24,8 @@ onUnmounted(() => {
             <NuxtLink to="/products">产品中心</NuxtLink>
           </template>
           <ul class="nav__list direction--column">
-            <li class="nav__list__item">
-              <NuxtLink to="/products#1">产品1</NuxtLink>
+            <li class="nav__list__item" v-for="productCategory in stateProductCategories" :key="productCategory.id">
+              <NuxtLink :to="`/products#${productCategory.name}`">{{ productCategory.name }}</NuxtLink>
             </li>
           </ul>
         </CompDetails>
@@ -128,7 +128,7 @@ onUnmounted(() => {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 640px) {
   .nav {
     align-self: center;
     justify-content: center;

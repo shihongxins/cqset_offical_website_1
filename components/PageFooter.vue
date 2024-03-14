@@ -5,6 +5,16 @@ const linksGroupInitState = computed(() => !state.value);
 onBeforeUnmount(() => {
   unWatch();
 });
+const stateProductCategories = useProductCategories();
+const { data: visitedIPCount } = await useRequest('/info/ip', {
+  transform: (res: any) => {
+    let count = 0;
+    if (res?.code === 0) {
+      count = res?.data || 0;
+    }
+    return count;
+  }
+});
 </script>
 
 <template>
@@ -16,20 +26,8 @@ onBeforeUnmount(() => {
             <h6>产品中心</h6>
           </template>
           <ul class="links__list">
-            <li class="links__item">
-              <a href="/products#智慧电网机器人">智慧电网机器人</a>
-            </li>
-            <li class="links__item">
-              <a href="/products#物联网系列">物联网系列</a>
-            </li>
-            <li class="links__item">
-              <a href="/products#输变配电故障预警系列">输变配电故障预警系列</a>
-            </li>
-            <li class="links__item">
-              <a href="/products#无人机搭载系列">无人机搭载系列</a>
-            </li>
-            <li class="links__item">
-              <a href="/products#其他">其他</a>
+            <li class="links__item" v-for="productCategory in stateProductCategories" :key="productCategory.id">
+              <NuxtLink :to="`/products#${productCategory.name}`">{{ productCategory.name }}</NuxtLink>
             </li>
           </ul>
         </CompDetails>
@@ -39,10 +37,10 @@ onBeforeUnmount(() => {
           </template>
           <ul class="links__list">
             <li class="links__item">
-              <a href="/news#公司新闻">公司新闻</a>
+              <NuxtLink to="/news#公司新闻">公司新闻</NuxtLink>
             </li>
             <li class="links__item">
-              <a href="/news#内容管理">内容管理</a>
+              <NuxtLink to="/news#内容管理">内容管理</NuxtLink>
             </li>
           </ul>
         </CompDetails>
@@ -52,7 +50,7 @@ onBeforeUnmount(() => {
           </template>
           <ul class="links__list">
             <li class="links__item">
-              <a href="/aboutus#公司简介">公司简介</a>
+              <NuxtLink to="/aboutus#公司简介">公司简介</NuxtLink>
             </li>
           </ul>
         </CompDetails>
@@ -62,15 +60,16 @@ onBeforeUnmount(() => {
           </template>
           <ul class="links__list">
             <li class="links__item">
-              <a href="tel:+86 023-67652845">023-67652845</a>
+              <NuxtLink to="tel:+86 023-67652845">023-67652845</NuxtLink>
             </li>
             <li class="links__item">
-              <a href="https://map.baidu.com/search/@11868070.3,3434963.955,19z?querytype=s&wd=%E9%87%8D%E5%BA%86%E5%8D%97%E7%94%B5%E7%A7%91%E6%8A%80%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8"
+              <NuxtLink
+                to="https://map.baidu.com/search/@11868070.3,3434963.955,19z?querytype=s&wd=%E9%87%8D%E5%BA%86%E5%8D%97%E7%94%B5%E7%A7%91%E6%8A%80%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8"
                 target="_blank">
                 <address>
                   重庆市江北区港安二路48号总部大楼 2，3 楼
                 </address>
-              </a>
+              </NuxtLink>
             </li>
           </ul>
         </CompDetails>
@@ -79,21 +78,20 @@ onBeforeUnmount(() => {
         <span>
           版权所有：
         </span>
-        <a href="//www.cqset.com" title="重庆南电科技股份有限公司">
+        <NuxtLink to="//www.cqset.com" title="重庆南电科技股份有限公司">
           重庆南电科技股份有限公司
-        </a>
+        </NuxtLink>
         <span>
           Copyright &copy; {{ currentYear }}
         </span>
-        <a target="_blank" href="//beian.miit.gov.cn/#/Integrated/index">
+        <NuxtLink to="//beian.miit.gov.cn/#/Integrated/index" target="_blank">
           渝ICP备16002017号-1
-        </a>
+        </NuxtLink>
       </p>
       <small class="visitor">
-        网站访问量：{{ 183744 }} 人/次
+        网站访问量：{{ visitedIPCount || 0 }} 人/次
       </small>
     </div>
-
   </footer>
 </template>
 
@@ -139,7 +137,7 @@ onBeforeUnmount(() => {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 640px) {
   .footer {
     .links {
       &__layout {
@@ -161,7 +159,7 @@ onBeforeUnmount(() => {
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+@media screen and (min-width: 640px) and (max-width: 1024px) {
   .footer {
     .links {
       &__layout {
