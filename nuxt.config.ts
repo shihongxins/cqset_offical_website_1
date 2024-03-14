@@ -1,11 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  devtools: { enabled: true },
   modules: [
     '@nuxt/ui',
     '@vueuse/nuxt',
   ],
   css: [
-    '~/assets/styles/globals.scss'
+    '~/assets/styles/globals.scss',
   ],
   app: {
     head: {
@@ -22,8 +23,21 @@ export default defineNuxtConfig({
       ],
       htmlAttrs: {
         lang: 'zh-CN'
-      }
-    }
+      },
+    },
   },
-  devtools: { enabled: true },
-})
+  nitro: {
+    routeRules: {
+      '/backend/**': {
+        proxy: {
+          to: 'http://www.cqset.com/api/**',
+        },
+      },
+    },
+  },
+  runtimeConfig: {
+    public: {
+      apiBaseURL: '/backend/',
+    },
+  },
+});
