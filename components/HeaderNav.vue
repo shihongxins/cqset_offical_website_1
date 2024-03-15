@@ -12,7 +12,12 @@ const { state: showNavIcon, unWatch } = useIsMobileState();
 onUnmounted(() => {
   unWatch();
 });
-const stateProductCategories = useProductCategories();
+const productCategories = computed(() => {
+  return categoriesStore.state.value.filter(item => item.category === 'product');
+});
+const aboutmeCategories = computed(() => {
+  return categoriesStore.state.value.filter(item => item.category === 'aboutme');
+});
 </script>
 
 <template>
@@ -24,7 +29,7 @@ const stateProductCategories = useProductCategories();
             <NuxtLink to="/products">产品中心</NuxtLink>
           </template>
           <ul class="nav__list direction--column">
-            <li class="nav__list__item" v-for="productCategory in stateProductCategories" :key="productCategory.id">
+            <li class="nav__list__item" v-for="productCategory in productCategories" :key="productCategory.id">
               <NuxtLink :to="`/products#${productCategory.name}`">{{ productCategory.name }}</NuxtLink>
             </li>
           </ul>
@@ -39,8 +44,8 @@ const stateProductCategories = useProductCategories();
             <NuxtLink to="/aboutus">关于我们</NuxtLink>
           </template>
           <ul class="nav__list direction--column">
-            <li class="nav__list__item">
-              <NuxtLink to="/aboutus#公司简介">公司简介</NuxtLink>
+            <li class="nav__list__item" v-for="aboutmeCategory in aboutmeCategories" :key="aboutmeCategory">
+              <NuxtLink :to="`/aboutus#${aboutmeCategory.name}`">{{ aboutmeCategory.name }}</NuxtLink>
             </li>
             <li class="nav__list__item">
               <NuxtLink to="/aboutus#联系我们">联系我们</NuxtLink>

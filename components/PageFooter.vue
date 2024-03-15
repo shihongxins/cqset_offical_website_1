@@ -5,7 +5,12 @@ const linksGroupInitState = computed(() => !state.value);
 onBeforeUnmount(() => {
   unWatch();
 });
-const stateProductCategories = useProductCategories();
+const productCategories = computed(() => {
+  return categoriesStore.state.value.filter(item => item.category === 'product');
+});
+const aboutmeCategories = computed(() => {
+  return categoriesStore.state.value.filter(item => item.category === 'aboutme');
+});
 const { data: visitedIPCount } = await useRequest('/info/ip', {
   transform: (res: any) => {
     let count = 0;
@@ -26,7 +31,7 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
             <h6>产品中心</h6>
           </template>
           <ul class="links__list">
-            <li class="links__item" v-for="productCategory in stateProductCategories" :key="productCategory.id">
+            <li class="links__item" v-for="productCategory in productCategories" :key="productCategory.id">
               <NuxtLink :to="`/products#${productCategory.name}`">{{ productCategory.name }}</NuxtLink>
             </li>
           </ul>
@@ -49,8 +54,8 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
             <h6>关于我们</h6>
           </template>
           <ul class="links__list">
-            <li class="links__item">
-              <NuxtLink to="/aboutus#公司简介">公司简介</NuxtLink>
+            <li class="links__item" v-for="aboutmeCategory in aboutmeCategories" :key="aboutmeCategory.id">
+              <NuxtLink :to="`/aboutus#${aboutmeCategory.name}`">{{ aboutmeCategory.name }}</NuxtLink>
             </li>
           </ul>
         </CompDetails>

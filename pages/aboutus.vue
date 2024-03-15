@@ -1,6 +1,11 @@
+<script lang="ts" setup>
+</script>
+
 <template>
-  <main>
-    <h1>关于我们</h1>
-    <p>这是一个关于我们的页面。</p>
-  </main>
+  <article>
+    <section class="brief">
+      <h2>公司简介</h2>
+      <div class="dynamic-content__container"></div>
+    </section>
+  </article>
 </template>
