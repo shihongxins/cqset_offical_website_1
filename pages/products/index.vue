@@ -1,5 +1,5 @@
 <template>
-  <p>
-    This is a simple Vue.js 3 component that displays "Hello, World!" when loaded.
-  </p>
+  <main>
+    <PageBanner banner-img-file-key="banner_product"></PageBanner>
+  </main>
 </template>

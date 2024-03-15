@@ -37,6 +37,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      resourceOrigin: '//www.cqset.com',
       apiBaseURL: '/backend/',
     },
   },

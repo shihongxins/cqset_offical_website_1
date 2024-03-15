@@ -1,5 +1,14 @@
+<script lang="ts" setup>
+const { y } = useWindowScroll();
+const bgOpacityStyle = computed(() => {
+  return {
+    '--tw-bg-opacity': Math.min(1, (y.value + 100) / 300),
+  };
+});
+</script>
+
 <template>
-  <header class="header">
+  <header class="header" :style="bgOpacityStyle">
     <div class="header__layout container container--large">
       <NuxtLink to="/" class="h-8 flex items-center">
         <img class="logo" alt="logo"
@@ -10,13 +19,18 @@
           重庆南电科技
         </h1>
       </NuxtLink>
-      <HeaderNav></HeaderNav>
+      <HeaderNav :bg-opacity-style="bgOpacityStyle"></HeaderNav>
     </div>
   </header>
 </template>
 
 <style lang="scss" scoped>
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
   padding: 0 1rem;
   @apply bg-stone-950;
 

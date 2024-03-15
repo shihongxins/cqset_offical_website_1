@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1>新闻资讯页</h1>
+    <PageBanner banner-img-file-key="banner_news"></PageBanner>
 
   </main>
 </template>
