@@ -1,9 +1,4 @@
 import type { UseFetchOptions } from "#app";
-export interface IRequestRes<DataT> {
-  code: number;
-  data?: DataT;
-  msg?: string;
-}
 
 const useRequest = <ResT = unknown>(url: string, options?: UseFetchOptions<ResT>) => {
   const runtimeConfig = useRuntimeConfig();

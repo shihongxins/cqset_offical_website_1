@@ -1,10 +1,5 @@
-import type { IRequestRes } from './useRequest';
-
-export interface ICategory {
-  id: number;
-  category: string;
-  name: string;
-}
+import type { ICategory, IBrief } from '~/types';
+import type { IResponseDataList } from "~/types/request";
 
 export const categoriesStore = {
   _state: () => useState<Array<ICategory>>('categories', () => []),
@@ -22,16 +17,10 @@ export const categoriesStore = {
           pageSize: 20,
         },
         transform: (res: any) => {
-          const resData = res as IRequestRes<{ list: ICategory[] }>;
-          let categories: ICategory[] = [];
+          const resData = res as IResponseDataList<ICategory>;
+          let categories: Array<ICategory> = [];
           if (resData?.code === 0 && resData?.data?.list) {
-            categories = [...resData?.data?.list].map((item) => {
-              return {
-                id: item?.id,
-                category: item?.category,
-                name: item?.name,
-              }
-            }).filter((item) => item?.id);
+            categories = [...resData?.data?.list].filter((item) => item?.id);
           }
           return categories;
         }
@@ -41,8 +30,6 @@ export const categoriesStore = {
     }
   }
 }
-
-export type IBrief = Pick<IArticle, 'id' | 'category' | 'title' | 'cover' | 'brief' | 'content'>;
 
 export const briefStore = {
   _state: () => useState<IBrief|null>('brief', () => null),
