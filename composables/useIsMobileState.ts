@@ -7,6 +7,7 @@ export const useIsMobileState = () => {
   }
   const unWatch = watch(isMobile, effect);
   onMounted(effect);
+  onUnmounted(unWatch);
   return {
     isMobile,
     state,

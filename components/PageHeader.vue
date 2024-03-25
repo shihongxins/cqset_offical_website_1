@@ -1,14 +1,9 @@
 <script lang="ts" setup>
-const { y } = useWindowScroll();
-const bgOpacityStyle = computed(() => {
-  return {
-    '--tw-bg-opacity': Math.min(1, (y.value + 100) / 300),
-  };
-});
+const { headerOpacityStyle } = useHeaderOpacityStyle();
 </script>
 
 <template>
-  <header class="header" :style="bgOpacityStyle">
+  <header class="header" :style="headerOpacityStyle">
     <div class="header__layout container container--large">
       <NuxtLink to="/" class="h-8 flex items-center">
         <img class="logo" alt="logo"
@@ -19,7 +14,7 @@ const bgOpacityStyle = computed(() => {
           重庆南电科技
         </h1>
       </NuxtLink>
-      <HeaderNav :bg-opacity-style="bgOpacityStyle"></HeaderNav>
+      <HeaderNav></HeaderNav>
     </div>
   </header>
 </template>

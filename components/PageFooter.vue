@@ -1,15 +1,18 @@
 <script lang="ts" setup>
+import type { ICategory } from '~/types';
+
 const currentYear = new Date().getFullYear();
 const { state, unWatch } = useIsMobileState();
 const linksGroupInitState = computed(() => !state.value);
 onBeforeUnmount(() => {
   unWatch();
 });
+const categories = useState<ICategory[]>('categories');
 const productCategories = computed(() => {
-  return categoriesStore.state.value.filter(item => item.category === 'product');
+  return categories.value.filter(item => item.category === 'product');
 });
 const aboutmeCategories = computed(() => {
-  return categoriesStore.state.value.filter(item => item.category === 'aboutme');
+  return categories.value.filter(item => item.category === 'aboutme');
 });
 const { data: visitedIPCount } = await useRequest('/info/ip', {
   transform: (res: any) => {

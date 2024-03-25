@@ -1,4 +1,6 @@
-<script setup>
+<script lang="ts" setup>
+import type { ICategory } from '~/types';
+
 const props = defineProps({
   bgOpacityStyle: {
     type: Object,
@@ -14,27 +16,27 @@ const navClass = computed(() => {
     'nav--open': navState.value === 'open',
   }
 });
-const { state: showNavIcon, unWatch } = useIsMobileState();
-onUnmounted(() => {
-  unWatch();
-});
+const { state: showNavIcon } = useIsMobileState();
+const categories = useState<ICategory[]>('categories');
 const productCategories = computed(() => {
-  return categoriesStore.state.value.filter(item => item.category === 'product');
+  return categories.value.filter(item => item.category === 'product');
 });
 const aboutmeCategories = computed(() => {
-  return categoriesStore.state.value.filter(item => item.category === 'aboutme');
+  return categories.value.filter(item => item.category === 'aboutme');
 });
+
+const { headerOpacityStyle } = useHeaderOpacityStyle();
 </script>
 
 <template>
   <nav class="nav" :class="navClass">
-    <ul class="nav__list" :style="bgOpacityStyle">
+    <ul class="nav__list" :style="headerOpacityStyle">
       <li class="nav__list__item">
         <CompDetails :icon="showNavIcon">
           <template v-slot:summary>
             <NuxtLink to="/products">产品中心</NuxtLink>
           </template>
-          <ul class="nav__list direction--column" :style="bgOpacityStyle">
+          <ul class="nav__list direction--column" :style="headerOpacityStyle">
             <li class="nav__list__item" v-for="productCategory in productCategories" :key="productCategory.id">
               <NuxtLink :to="`/products#${productCategory.name}`">{{ productCategory.name }}</NuxtLink>
             </li>
@@ -49,7 +51,7 @@ const aboutmeCategories = computed(() => {
           <template v-slot:summary>
             <NuxtLink to="/aboutus">关于我们</NuxtLink>
           </template>
-          <ul class="nav__list direction--column" :style="bgOpacityStyle">
+          <ul class="nav__list direction--column" :style="headerOpacityStyle">
             <li class="nav__list__item" v-for="aboutmeCategory in aboutmeCategories" :key="aboutmeCategory">
               <NuxtLink :to="`/aboutus#${aboutmeCategory.name}`">{{ aboutmeCategory.name }}</NuxtLink>
             </li>
