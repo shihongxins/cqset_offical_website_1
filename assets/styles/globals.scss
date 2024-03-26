@@ -17,8 +17,19 @@ a {
 
 .container {
   margin: 0 auto;
-  max-width: 960px;
+  padding: 1rem;
+  max-width: 1200px;
   &--large {
     max-width: 1440px;
+  }
+}
+
+.section__title {
+  @apply mt-16 mb-10 w-full leading-10 text-center text-3xl truncate;
+}
+
+@media screen and (max-width: 640px) {
+  .section__title {
+    @apply my-4 leading-6 text-xl;
   }
 }

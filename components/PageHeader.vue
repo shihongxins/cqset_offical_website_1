@@ -21,11 +21,6 @@ const { headerOpacityStyle } = useHeaderOpacityStyle();
 
 <style lang="scss" scoped>
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
   padding: 0 1rem;
   @apply bg-stone-950;
 
@@ -59,6 +54,16 @@ const { headerOpacityStyle } = useHeaderOpacityStyle();
         display: block;
       }
     }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
   }
 }
 </style>

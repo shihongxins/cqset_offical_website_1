@@ -67,3 +67,18 @@ export interface IUploadedFile extends IDataRecord {
 }
 
 export type IUploadedFilesQuery = Partial<Pick<IUploadedFile & IRequestList, 'key' | 'memo' | 'page' | 'pageSize'>>;
+
+export interface IContactInfomation {
+  company: string;
+  phone: string;
+  address: string;
+  bMapLink: string;
+  website: string;
+}
+
+export interface ISuggestion {
+  content: string;
+  name: string;
+  email: string;
+  phone: string;
+}

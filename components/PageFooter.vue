@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ICategory } from '~/types';
+import type { ICategory, IContactInfomation } from '~/types';
 
 const currentYear = new Date().getFullYear();
 const { state, unWatch } = useIsMobileState();
@@ -14,6 +14,7 @@ const productCategories = computed(() => {
 const aboutmeCategories = computed(() => {
   return categories.value.filter(item => item.category === 'aboutme');
 });
+const contactInfomation = useState<IContactInfomation>('contact-infomation');
 const { data: visitedIPCount } = await useRequest('/info/ip', {
   transform: (res: any) => {
     let count = 0;
@@ -60,6 +61,12 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
             <li class="links__item" v-for="aboutmeCategory in aboutmeCategories" :key="aboutmeCategory.id">
               <NuxtLink :to="`/aboutus#${aboutmeCategory.name}`">{{ aboutmeCategory.name }}</NuxtLink>
             </li>
+            <li class="links__item">
+              <NuxtLink to="/aboutus#联系我们">联系我们</NuxtLink>
+            </li>
+            <li class="links__item">
+              <NuxtLink to="/aboutus#意见反馈">意见反馈</NuxtLink>
+            </li>
           </ul>
         </CompDetails>
         <CompDetails class="links__group" :open="linksGroupInitState">
@@ -68,14 +75,14 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
           </template>
           <ul class="links__list">
             <li class="links__item">
-              <NuxtLink to="tel:+86 023-67652845">023-67652845</NuxtLink>
+              <NuxtLink :to="'tel:+86' + contactInfomation.phone">
+                {{ contactInfomation.phone }}
+              </NuxtLink>
             </li>
             <li class="links__item">
-              <NuxtLink
-                to="https://map.baidu.com/search/@11868070.3,3434963.955,19z?querytype=s&wd=%E9%87%8D%E5%BA%86%E5%8D%97%E7%94%B5%E7%A7%91%E6%8A%80%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8"
-                target="_blank">
+              <NuxtLink :to="contactInfomation.bMapLink" target="_blank">
                 <address>
-                  重庆市江北区港安二路48号总部大楼 2，3 楼
+                  {{ contactInfomation.address }}
                 </address>
               </NuxtLink>
             </li>
@@ -86,8 +93,8 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
         <span>
           版权所有：
         </span>
-        <NuxtLink to="//www.cqset.com" title="重庆南电科技股份有限公司">
-          重庆南电科技股份有限公司
+        <NuxtLink :to="contactInfomation.website" :title="contactInfomation.company">
+          {{ contactInfomation.company }}
         </NuxtLink>
         <span>
           Copyright &copy; {{ currentYear }}
@@ -105,6 +112,7 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
 
 <style lang="scss" scoped>
 .footer {
+  margin-top: 2rem;
   padding: 1rem;
   text-align: center;
   @apply bg-stone-950 text-slate-50;
@@ -147,6 +155,8 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
 
 @media screen and (max-width: 640px) {
   .footer {
+    margin-top: 2rem;
+
     .links {
       &__layout {
         flex-flow: column nowrap;
@@ -169,6 +179,8 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
 
 @media screen and (min-width: 640px) and (max-width: 1024px) {
   .footer {
+    margin-top: 4rem;
+
     .links {
       &__layout {
         flex-flow: row wrap;
@@ -184,6 +196,7 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
 
 @media screen and (min-width: 1024px) {
   .footer {
+    margin-top: 6rem;
     padding: 2rem 4rem;
 
     .links {

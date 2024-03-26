@@ -52,14 +52,14 @@ const { headerOpacityStyle } = useHeaderOpacityStyle();
             <NuxtLink to="/aboutus">关于我们</NuxtLink>
           </template>
           <ul class="nav__list direction--column" :style="headerOpacityStyle">
-            <li class="nav__list__item" v-for="aboutmeCategory in aboutmeCategories" :key="aboutmeCategory">
+            <li class="nav__list__item" v-for="aboutmeCategory in aboutmeCategories" :key="aboutmeCategory.id">
               <NuxtLink :to="`/aboutus#${aboutmeCategory.name}`">{{ aboutmeCategory.name }}</NuxtLink>
             </li>
             <li class="nav__list__item">
               <NuxtLink to="/aboutus#联系我们">联系我们</NuxtLink>
             </li>
             <li class="nav__list__item">
-              <NuxtLink to="/aboutus#意见建议">意见建议</NuxtLink>
+              <NuxtLink to="/aboutus#意见反馈">意见反馈</NuxtLink>
             </li>
           </ul>
         </CompDetails>
