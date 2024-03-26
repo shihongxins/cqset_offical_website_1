@@ -6,7 +6,6 @@ export const useHeaderOpacityStyle = () => {
   const { y } = useWindowScroll();
   const effect = () => {
     const isPC = useMediaQuery('(min-width: 1024px)');
-    console.log(isPC.value);
     opacity.value = isPC.value ? Math.min(1, (y.value + 100) / 300) : 1;
   }
   const unWatch = watch(y, effect);

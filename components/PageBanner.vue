@@ -6,7 +6,8 @@ const props = defineProps({
     required: true,
   }
 });
-const DOMBannerContainerRef = ref(null);
+
+const mounted = ref(false);
 const CompCarouselRef = ref(null);
 
 const { data: bannerImgFiles } = useQueryUploadedFiles({
@@ -15,9 +16,11 @@ const { data: bannerImgFiles } = useQueryUploadedFiles({
 
 const bannerImgFileURLs = computed(() => {
   let urls = [];
-  if (DOMBannerContainerRef.value && bannerImgFiles.value?.data?.list?.length) {
+  if (mounted.value && bannerImgFiles.value?.data?.list?.length) {
+    const { devicePixelRatio = 1, innerWidth } = window;
+    const bannerImgWidth = innerWidth * devicePixelRatio;
     urls = bannerImgFiles.value.data.list.filter((file) => file.url).map((file) => {
-      return `${runtimeConfig.public.resourceOrigin}/${file.url}?h=${DOMBannerContainerRef.value.offsetHeight}`;
+      return `${runtimeConfig.public.resourceOrigin}/${file.url}?width=${bannerImgWidth}`.replace('/uploads', '/api/file/uploads');
     });
   }
   return urls;
@@ -38,6 +41,7 @@ const handleCarouselChange = (increase = 1) => {
 }
 
 onMounted(() => {
+  mounted.value = true;
   setInterval(() => {
     if (onFocus.value) return;
     handleCarouselChange();
@@ -47,7 +51,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="banner__container" ref="DOMBannerContainerRef">
+  <div class="banner__container">
     <UCarousel ref="CompCarouselRef" :items="bannerImgFileURLs" v-slot="{ item }" :ui="{ item: 'basis-full' }"
       :indicators="bannerImgFileURLs.length > 1" @mouseenter="handleFocus(true)" @mouseleave="handleFocus(false)"
       @touchstart="handleFocus(true)" @touchend="handleFocus(false)">
