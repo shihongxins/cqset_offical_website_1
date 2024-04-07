@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   ],
   css: [
     '~/assets/styles/globals.scss',
+    '~/assets/styles/ckeditor-content-style.css'
   ],
   app: {
     head: {
