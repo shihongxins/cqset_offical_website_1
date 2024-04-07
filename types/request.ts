@@ -1,4 +1,4 @@
-export interface IRequestList {
+export interface IListRequestParams {
   /**
    * 页码
    */
@@ -24,6 +24,6 @@ export interface IResponseData<T = any> {
   data?: T;
 }
 
-export type IResponseDataList<T = any> = IResponseData<null|({ list: Array<T>, total: number } & IRequestList)>
+export type IResponseDataList<T = any> = IResponseData<null|({ list: Array<T>, total: number } & IListRequestParams)>
 
 export type IResponseDataDetail<T = any> = IResponseData<null|({ detail: T })>

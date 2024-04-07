@@ -1,4 +1,4 @@
-import type { IRequestList } from './request';
+import type { IListRequestParams } from './request';
 
 /**
  * 数据记录
@@ -46,6 +46,15 @@ export interface IArticle extends IDataRecord {
 }
 
 /**
+ * 新闻详情
+ */
+export interface INewsDetail {
+  preview: number;
+  detail: IArticle;
+  next: number;
+}
+
+/**
  * 公司简介
  */
 export type IBrief = Pick<IArticle, 'id' | 'category' | 'title' | 'cover' | 'brief' | 'content'>;
@@ -66,7 +75,7 @@ export interface IUploadedFile extends IDataRecord {
 	name: string;
 }
 
-export type IUploadedFilesQuery = Partial<Pick<IUploadedFile & IRequestList, 'key' | 'memo' | 'page' | 'pageSize'>>;
+export type IUploadedFilesQuery = Partial<Pick<IUploadedFile & IListRequestParams, 'key' | 'memo' | 'page' | 'pageSize'>>;
 
 export interface IContactInfomation {
   company: string;

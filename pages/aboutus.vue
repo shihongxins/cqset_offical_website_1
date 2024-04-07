@@ -80,7 +80,7 @@ const submitSuggestion = async (event: FormSubmitEvent<ISuggestion>) => {
     <article class="container">
       <section class="brief">
         <h2 id="公司简介" class="section__title">公司简介</h2>
-        <section class="dynamic-content__container" v-html="brief.content"></section>
+        <section class="ck-content" v-html="brief.content"></section>
       </section>
       <section class="contact-us">
         <h2 id="联系我们" class="section__title">联系我们</h2>

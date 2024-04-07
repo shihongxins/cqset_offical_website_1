@@ -19,7 +19,7 @@ const { data: categories } = await useRequest('/product_class/list', {
 useState('categories', () => categories.value || []);
 
 
-const { data: brief } = await useQueryArticleDetail({
+const { data: brief } = await useQueryProductDetail({
   title: '公司简介',
 });
 useState('brief', () => brief.value as IBrief);
