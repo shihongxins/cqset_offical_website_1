@@ -91,3 +91,9 @@ export interface ISuggestion {
   email: string;
   phone: string;
 }
+
+export interface IProductList {
+  product_class: Pick<ICategory, 'name'>;
+  count: number;
+  list: IArticle[];
+}
