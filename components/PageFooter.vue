@@ -28,7 +28,7 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
 
 <template>
   <footer class="footer">
-    <div class="footer__layout container container--large">
+    <div class="footer__layout container">
       <div class="links__layout">
         <CompDetails class="links__group" :open="linksGroupInitState">
           <template v-slot:summary>

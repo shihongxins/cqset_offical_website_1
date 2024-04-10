@@ -35,6 +35,7 @@ useState<IContactInfomation>('contact-infomation', () => ({
 
 <template>
   <NuxtLayout>
+    <NuxtLoadingIndicator />
     <NuxtPage />
     <UNotifications />
   </NuxtLayout>

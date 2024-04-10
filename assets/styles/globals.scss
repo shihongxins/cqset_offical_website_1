@@ -15,10 +15,10 @@ a {
 .container {
   margin: 0 auto;
   padding: 1rem;
+}
+.ck-content {
+  margin: auto;
   max-width: 1200px;
-  &--large {
-    max-width: 1440px;
-  }
 }
 
 .section__title {

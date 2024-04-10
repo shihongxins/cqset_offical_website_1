@@ -1,12 +1,6 @@
 <script lang="ts" setup>
 import type { ICategory } from '~/types';
 
-const props = defineProps({
-  bgOpacityStyle: {
-    type: Object,
-    default: () => ({})
-  },
-});
 const navState = ref('closed');
 const toggleNav = () => {
   navState.value = navState.value === 'open' ? 'closed' : 'open';

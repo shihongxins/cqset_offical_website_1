@@ -3,14 +3,14 @@ const { headerOpacityStyle } = useHeaderOpacityStyle();
 </script>
 
 <template>
-  <header class="header" :style="headerOpacityStyle">
-    <div class="header__layout container container--large">
+  <header class="header fixed top-0 left-0 right-0 z-50 px-4 bg-stone-900" :style="headerOpacityStyle">
+    <div class="header__layout container h-16 flex justify-between items-center">
       <NuxtLink to="/" class="h-8 flex items-center">
-        <img class="logo" alt="logo"
+        <img class="logo mr-4 h-full object-contain" alt="logo"
           srcset="https://www.cqset.com/uploads/129d018a2bedce166915bb1b71bf8cfd_20240305165703.png 180w,https://www.cqset.com/uploads/138db59c896b7ebcaf7206219dd3afc9_20240305165703.png"
           sizes="(max-width: 750px) 180px, 100vw"
           src="https://www.cqset.com/uploads/129d018a2bedce166915bb1b71bf8cfd_20240305165703.png" />
-        <h1 class="title">
+        <h1 class="title font-semibold text-xl text-sky-600 truncate hidden sm:block">
           重庆南电科技
         </h1>
       </NuxtLink>
@@ -18,52 +18,3 @@ const { headerOpacityStyle } = useHeaderOpacityStyle();
     </div>
   </header>
 </template>
-
-<style lang="scss" scoped>
-.header {
-  padding: 0 1rem;
-  @apply bg-stone-950;
-
-  .header__layout {
-    height: 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .logo {
-      height: 100%;
-      object-fit: contain;
-      margin-right: 1rem;
-    }
-
-    .title {
-      display: none;
-      font-weight: 600;
-      letter-spacing: 0.1rem;
-      font-size: 1.25rem;
-      white-space: nowrap;
-      @apply text-blue-800;
-    }
-  }
-}
-
-@media screen and (max-width: 640px) {
-  .header {
-    .header__layout {
-      .title {
-        display: block;
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-  }
-}
-</style>
