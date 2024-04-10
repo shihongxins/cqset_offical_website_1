@@ -114,6 +114,7 @@ const { headerOpacityStyle } = useHeaderOpacityStyle();
         position: absolute;
         top: 0;
         left: 50%;
+        z-index: 9999;
         transform: translate(-50%, -100%);
         transition: all 0.3s ease-in-out;
 
