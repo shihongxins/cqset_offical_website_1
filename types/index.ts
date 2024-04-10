@@ -92,6 +92,12 @@ export interface ISuggestion {
   phone: string;
 }
 
+export interface IProductListQuery {
+  page?: number;
+  pageSize?: number;
+  class_id?: Pick<ICategory, 'id'>;
+}
+
 export interface IProductList {
   product_class: Pick<ICategory, 'name'>;
   count: number;

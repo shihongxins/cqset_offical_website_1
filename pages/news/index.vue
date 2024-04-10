@@ -95,10 +95,8 @@ onMounted(() => {
   <main>
     <PageBanner banner-img-file-key="banner_news"></PageBanner>
     <ul ref="refDOMNewsList" class="news__list container">
-      <li class="new__list__item p-4 rounded shadow" v-for="newsInfo in newsList" :key="newsInfo.id">
-        <NuxtLink :to="`/news/${newsInfo.id}`" class="w-full overflow-hidden">
-          <NewsListItem :news-info="newsInfo" />
-        </NuxtLink>
+      <li class="new__list__item" v-for="newsInfo in newsList" :key="newsInfo.id">
+        <NewsListItem :news-info="newsInfo" />
       </li>
     </ul>
     <ClientOnly>

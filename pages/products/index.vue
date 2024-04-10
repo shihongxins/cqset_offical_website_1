@@ -1,22 +1,5 @@
 <script lang="ts" setup>
-import type { IProductList } from '~/types';
-import type { IResponseData } from '~/types/request';
-const { data: productList } = useRequest<IProductList[]>('/backend/product/list', {
-  query: {
-    page: 1,
-    pageSize: 20,
-  },
-  transform: (input: any) => {
-    let productList: IProductList[] = [];
-    const res = input as IResponseData<IProductList[]>;
-    if (res.code === 0) {
-      productList = res.data || [];
-    } else {
-      throw new Error(res.msg);
-    }
-    return productList;
-  }
-});
+const { data: productList } = useQueryProductList();
 </script>
 
 <template>
@@ -37,9 +20,7 @@ const { data: productList } = useRequest<IProductList[]>('/backend/product/list'
         </h4>
         <section class="grow-0 overflow-hidden basis-full p-2 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5"
           v-for="product in category.list">
-          <NuxtLink class="block w-full h-full overflow-hidden" :to="`/products/${product.id}`">
-            <ProductCard :product="product"></ProductCard>
-          </NuxtLink>
+          <ProductCard :product="product"></ProductCard>
         </section>
       </article>
     </div>

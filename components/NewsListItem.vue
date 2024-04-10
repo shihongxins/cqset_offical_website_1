@@ -28,22 +28,24 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="news-info w-full h-32 overflow-hidden flex">
-    <div class="news-info--detail flex-1 overflow-hidden flex flex-col">
-      <h6 class="news-info--title text-base truncate md:text-lg">{{ props.newsInfo.title }}</h6>
-      <p class="news-info--content flex-1 mb-2 line-clamp-4 indent-8 text-sm text-stone-600 md:text-base"
+  <NuxtLink
+    class="news-info m-4 rounded p-4 h-40 shadow overflow-hidden flex hover:scale-95 hover:shadow-md transform-gpu transition-all duration-200"
+    :to="`/news/${props.newsInfo.id}`">
+    <div class="news-info__detail flex-1 overflow-hidden flex flex-col">
+      <h6 class="news-info__title text-base truncate md:text-lg">{{ props.newsInfo.title }}</h6>
+      <p class="news-info__content flex-1 mb-2 line-clamp-4 indent-8 text-sm text-stone-600 md:text-base md:line-clamp-3"
         v-html="props.newsInfo.brief"></p>
-      <span class="news-info--datetime text-xs text-stone-400">{{ props.newsInfo.createdAt }}</span>
+      <span class="news-info__datetime text-xs text-stone-400">{{ props.newsInfo.createdAt }}</span>
     </div>
-    <div ref="refDOMImgCover" class="news-info--cover shrink-0 ml-2 rounded max-w-1/4 w-40 h-full overflow-hidden">
+    <div ref="refDOMImgCover" class="news-info__cover shrink-0 ml-2 rounded max-w-1/4 w-40 h-full overflow-hidden">
       <img :src="coverURL" :alt="props.newsInfo.title" class="w-full h-full object-cover" />
     </div>
-  </section>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>
 .news-info {
-  &--cover {
+  &__cover {
     max-width: 25%;
   }
 }
