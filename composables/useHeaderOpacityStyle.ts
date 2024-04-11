@@ -4,8 +4,9 @@ export const useHeaderOpacityStyle = () => {
     '--tw-bg-opacity': opacity.value.toString(),
   }));
   const { y } = useWindowScroll();
+  const { state: isMobile } = useIsMobileState();
   const effect = () => {
-    opacity.value = Math.max(0.5, Math.min(y.value / window.innerHeight, 1));
+    opacity.value = Math.max(isMobile.value ? 0.7 : 0.5, Math.min(y.value / window.innerHeight, 1));
   }
   const unWatch = watch(y, effect);
   onMounted(effect);
