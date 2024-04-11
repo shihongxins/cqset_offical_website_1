@@ -56,23 +56,8 @@ const dividerAttrs = computed(() => {
   return attrs;
 });
 
-const backTopVisible = ref(false);
-const backTop = () => {
-  window.scroll({
-    top: 0,
-    left: 0,
-    behavior: 'smooth',
-  });
-  document.documentElement.scrollTop = 0;
-}
-
-const handleScroll = () => {
-  backTopVisible.value = window.innerHeight < (window.scrollY || document.documentElement.scrollTop);
-}
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-  backTop();
   let distance = 0;
   const footerDOM = document.querySelector('footer.footer');
   if (footerDOM) {
@@ -101,8 +86,6 @@ onMounted(() => {
     </ul>
     <ClientOnly>
       <UDivider v-show="dividerAttrs.show" :icon="dividerAttrs.icon" :label="dividerAttrs.label"></UDivider>
-      <UButton v-show="backTopVisible" class="fixed right-8 bottom-60 z-50 bg-sky-600"
-        icon="i-heroicons-arrow-up-circle-solid" @click="backTop"></UButton>
     </ClientOnly>
   </main>
 </template>
