@@ -1,14 +1,18 @@
 <script lang="ts" setup>
+import type { ComponentInternalInstance } from 'vue';
 const props = withDefaults(
   defineProps<{
+    name?: string;
     open?: boolean;
+    autoClose?: boolean;
     icon?: boolean;
     summary?: string;
     content?: string;
   }>(), {
   icon: true,
 });
-const emit = defineEmits(['update:open', 'toggle']);
+const name = ref(props.name);
+const emit = defineEmits(['update:open', 'show', 'close', 'toggle']);
 const _state = ref(props.open);
 const state = computed({
   get: () => {
@@ -18,25 +22,60 @@ const state = computed({
     _state.value = Boolean(newState);
     emit('update:open', newState);
     emit('toggle', newState);
+    handleAccordion();
   }
 });
-const toggleDetails = () => {
-  state.value = !(state.value) || null;
+const show = () => {
+  state.value = true;
+}
+const close = () => {
+  state.value = null;
+}
+const toggle = () => {
+  state.value ? close() : show();
+}
+const handleAutoClose = () => {
+  if (props.autoClose && state.value) {
+    close();
+  }
 }
 
+const instance = getCurrentInstance();
+onMounted(() => {
+  if (instance && instance.vnode.el) {
+    instance.vnode.el.vm = instance;
+  }
+});
+const handleAccordion = async () => {
+  if (state.value) {
+    await nextTick();
+    const details = document.querySelectorAll(`.details[open][name='${name.value}']`);
+    for (let i = 0; i < details.length; i++) {
+      const vm: ComponentInternalInstance = (details[i] as any).vm;
+      if (vm && vm !== instance) {
+        vm.exposed!.toggle();
+      }
+    }
+  }
+}
+defineExpose({
+  name,
+  state,
+  show,
+  close,
+  toggle,
+});
 </script>
 
 <template>
-  <div class="details" :open="state">
-    <div class="details__summary" @click="toggleDetails">
+  <div class="details" :name="name" :open="state">
+    <div class="details__summary" @click="toggle">
       <slot name="summary">{{ summary }}</slot>
-      <div class="details__icon" v-if="icon">
-        <slot name="icon">
-          <i></i>
-        </slot>
-      </div>
+      <slot name="icon" v-if="icon">
+        <i class="details__icon"></i>
+      </slot>
     </div>
-    <div class="details__content">
+    <div class="details__content" @click="handleAutoClose">
       <slot>{{ content }}</slot>
     </div>
   </div>
@@ -55,38 +94,18 @@ const toggleDetails = () => {
   }
 
   &__icon {
-    display: inline-flex;
-    align-items: center;
     margin-left: auto;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 
-    >i {
-      display: inline-block;
-      padding: 0.5rem;
-      width: 1rem;
-      height: 1rem;
-      position: relative;
-      transform: rotate(0deg);
-      transition: transform 0.3s ease-out;
-
-      &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        margin: auto;
-        width: 0.8em;
-        height: 2px;
-        background-color: currentColor;
-        transition: all 0.3s ease-out;
-      }
-
-      &::after {
-        width: 0.7em;
-        transform: rotate(90deg);
-        opacity: 1;
-      }
+    &::before {
+      content: '';
+      display: list-item;
+      list-style: disclosure-closed inside;
+      margin-left: 8px;
+      cursor: pointer;
     }
-
   }
 
   &__content {
@@ -96,16 +115,12 @@ const toggleDetails = () => {
   }
 
   &[open] {
-    .details__icon>i {
-      transform: rotate(180deg);
-
-      &::after {
-        opacity: 0;
-      }
+    .details__icon::before {
+      list-style: disclosure-open inside;
     }
 
     .details__content {
-      max-height: 1000px;
+      max-height: unset;
     }
   }
 }

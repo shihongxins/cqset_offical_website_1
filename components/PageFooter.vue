@@ -30,7 +30,7 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
   <footer class="footer">
     <div class="footer__layout container">
       <div class="links__layout">
-        <CompDetails class="links__group" :open="linksGroupInitState">
+        <CompDetails class="links__group" name="footer__links__group__details" :open="linksGroupInitState">
           <template v-slot:summary>
             <h6>产品中心</h6>
           </template>
@@ -40,7 +40,7 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
             </li>
           </ul>
         </CompDetails>
-        <CompDetails class="links__group" :open="linksGroupInitState">
+        <CompDetails class="links__group" name="footer__links__group__details" :open="linksGroupInitState">
           <template v-slot:summary>
             <h6>新闻资讯</h6>
           </template>
@@ -53,7 +53,7 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
             </li>
           </ul>
         </CompDetails>
-        <CompDetails class="links__group" :open="linksGroupInitState">
+        <CompDetails class="links__group" name="footer__links__group__details" :open="linksGroupInitState">
           <template v-slot:summary>
             <h6>关于我们</h6>
           </template>
@@ -69,7 +69,7 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
             </li>
           </ul>
         </CompDetails>
-        <CompDetails class="links__group" :open="linksGroupInitState">
+        <CompDetails class="links__group" name="footer__links__group__details" :open="linksGroupInitState">
           <template v-slot:summary>
             <h6>联系我们</h6>
           </template>
@@ -100,7 +100,8 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
           渝ICP备16002017号-1
         </NuxtLink>
         <NuxtLink to="https://beian.mps.gov.cn/#/query/webSearch?code=50010502503498" target="_blank">
-          <img src="https://beian.mps.gov.cn/favicon.ico" alt="渝公网安备图标" class=" inline-block w-4 h-4 mr-1">
+          <img src="https://beian.mps.gov.cn/favicon.ico" alt="渝公网安备图标"
+            class="inline-block w-4 h-4 mr-1 align-baseline">
           <span>渝公网安备 50010502503498 号</span>
         </NuxtLink>
       </p>

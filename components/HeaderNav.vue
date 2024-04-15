@@ -2,8 +2,12 @@
 import type { ICategory } from '~/types';
 
 const navState = ref('closed');
-const toggleNav = () => {
-  navState.value = navState.value === 'open' ? 'closed' : 'open';
+const toggleNav = (ev?: MouseEvent | TouchEvent) => {
+  const target = ev?.target || ev?.srcElement;
+  const parentElement = target instanceof Element ? target.parentElement : null;
+  if (!ev || parentElement?.classList.contains('nav')) {
+    navState.value = navState.value === 'open' ? 'closed' : 'open';
+  }
 }
 const navClass = computed(() => {
   return {
@@ -21,15 +25,21 @@ const productCategories = computed(() => {
 const aboutmeCategories = computed(() => {
   return categories.value.filter(item => item.category === 'aboutme');
 });
+
+const route = useRoute();
+watch(() => [route.fullPath], () => {
+  navState.value = 'closed';
+});
 </script>
 
 <template>
   <nav class="nav" :class="navClass">
     <UButton class="nav__hamburger shrink-0 block sm:hidden"
-      :icon="navState === 'closed' ? 'i-heroicons-bars-3' : 'i-heroicons-x-mark'" variant="link" @click="toggleNav" />
-    <ul class="nav__list" :style="headerOpacityStyle">
+      :icon="navState === 'closed' ? 'i-heroicons-bars-3' : 'i-heroicons-x-mark'" variant="link"
+      @click.="toggleNav()" />
+    <ul class="nav__list" :style="headerOpacityStyle" @click="toggleNav" @touchend="toggleNav">
       <li class="nav__list__item">
-        <CompDetails :icon="showNavIcon">
+        <CompDetails name="nav__list__item__details" :icon="showNavIcon" auto-close>
           <template v-slot:summary>
             <NuxtLink to="/products">产品中心</NuxtLink>
           </template>
@@ -44,7 +54,7 @@ const aboutmeCategories = computed(() => {
         <NuxtLink to="/news">新闻资讯</NuxtLink>
       </li>
       <li class="nav__list__item">
-        <CompDetails :icon="showNavIcon">
+        <CompDetails name="nav__list__item__details" :icon="showNavIcon" auto-close>
           <template v-slot:summary>
             <NuxtLink to="/aboutus">关于我们</NuxtLink>
           </template>
@@ -108,11 +118,12 @@ const aboutmeCategories = computed(() => {
   &>.nav__list {
     position: fixed;
     top: 64px;
-    left: 0;
     right: 0;
-    z-index: 99;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
     width: 100%;
-    overflow: hidden;
+    overflow: hidden auto;
     display: none;
   }
 
