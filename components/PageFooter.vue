@@ -27,9 +27,10 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
 </script>
 
 <template>
-  <footer class="footer">
+  <footer class="footer mt-8 p-4 text-sm text-center bg-stone-900 text-white md:mt-16 lg:mt-24 lg:px-16 lg:py-8">
     <div class="footer__layout container">
-      <div class="links__layout">
+      <div
+        class="links__layout flex flex-col flex-nowrap items-stretch sm:flex-row sm:flex-wrap lg:flex-nowrap lg:items-start lg:justify-between">
         <CompDetails class="links__group" name="footer__links__group__details" :open="linksGroupInitState">
           <template v-slot:summary>
             <h6>产品中心</h6>
@@ -114,37 +115,27 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
 
 <style lang="scss" scoped>
 .footer {
-  margin-top: 2rem;
-  padding: 1rem;
-  text-align: center;
-  @apply bg-stone-950 text-slate-50;
 
   .links {
-    &__layout {
-      display: flex;
-      flex-flow: column nowrap;
-      align-items: stretch;
-    }
 
     &__group {
-      width: auto;
 
       :deep(.details__summary) {
         border-bottom: 1px solid;
         height: 3rem;
-        pointer-events: none;
+        pointer-events: all;
 
         .details__icon {
-          display: none;
+          display: inline-flex;
         }
 
-        @apply border-slate-50;
+        @apply border-white;
 
         h6 {
           border-bottom: 2px solid;
           height: 3rem;
           line-height: 3rem;
-          @apply border-slate-50 truncate;
+          @apply border-white truncate;
         }
       }
     }
@@ -155,42 +146,17 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (min-width: 640px) {
   .footer {
-    margin-top: 2rem;
 
-    .links {
-      &__layout {
-        flex-flow: column nowrap;
-      }
+    .links__group {
+      width: 18rem;
+      min-width: 50%;
 
-      &__group {
-        width: auto;
-
-        :deep(.details__summary) {
-          pointer-events: all;
-
-          .details__icon {
-            display: inline-flex;
-          }
+      :deep(.details__summary) {
+        .details__icon {
+          display: none;
         }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 640px) and (max-width: 1024px) {
-  .footer {
-    margin-top: 4rem;
-
-    .links {
-      &__layout {
-        flex-flow: row wrap;
-      }
-
-      &__group {
-        width: 18rem;
-        min-width: 50%;
       }
     }
   }
@@ -198,21 +164,10 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
 
 @media screen and (min-width: 1024px) {
   .footer {
-    margin-top: 6rem;
-    padding: 2rem 4rem;
 
-    .links {
-      &__layout {
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        align-items: flex-start;
-      }
-
-      &__group {
-        min-width: auto;
-        width: 18rem;
-        text-align: left;
-      }
+    .links__group {
+      min-width: auto;
+      text-align: left;
     }
   }
 }
