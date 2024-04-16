@@ -17,7 +17,7 @@ const briefCoverImgURL = computed(() => {
     const { devicePixelRatio = 1 } = window;
     const { clientWidth = 0, clientHeight = 0 } = refDOMBriefCoverImg.value || {};
     const maxAttribute = clientWidth > clientHeight ? 'width' : 'height';
-    const maxValue = Math.max(clientWidth, clientHeight) * devicePixelRatio;
+    const maxValue = Math.round(Math.max(clientWidth, clientHeight) * devicePixelRatio);
     url = `${runtimeConfig.public.resourceOrigin}/${brief.value.cover}?${maxAttribute}=${maxValue}`.replace('/uploads', '/api/file/uploads');
   }
   return url;

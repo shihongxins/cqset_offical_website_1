@@ -40,7 +40,7 @@ const bannerImgFileURLs = computed(() => {
   let urls = [];
   if (mounted.value && bannerImgFiles.value?.data?.list?.length) {
     const { devicePixelRatio = 1, innerWidth } = window;
-    const bannerImgWidth = innerWidth * devicePixelRatio;
+    const bannerImgWidth = Math.round(innerWidth * devicePixelRatio);
     const bannerImgRatio = isMobile.value ? 10 / 16 : 5 / 16;
     const bannerImgHeight = Math.round(bannerImgWidth * bannerImgRatio);
     urls = bannerImgFiles.value.data.list.filter((file) => file.url).map((file) => {

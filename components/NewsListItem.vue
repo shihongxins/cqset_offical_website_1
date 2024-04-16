@@ -16,7 +16,7 @@ const coverURL = computed(() => {
     const { clientHeight = 0, clientWidth = 0 } = refDOMImgCover.value || {};
 
     const maxAttribute = clientWidth > clientHeight ? 'width' : 'height';
-    const maxValue = Math.max(clientWidth, clientHeight) * devicePixelRatio;
+    const maxValue = Math.round(Math.max(clientWidth, clientHeight) * devicePixelRatio);
     url = `${runtimeConfig.public.resourceOrigin}/${props.newsInfo.cover}?${maxAttribute}=${maxValue}`.replace('/uploads', '/api/file/uploads');
   }
   return url;

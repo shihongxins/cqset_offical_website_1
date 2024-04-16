@@ -19,7 +19,7 @@ const productCoverURL = computed(() => {
     const { devicePixelRatio = 1 } = window;
     const { clientWidth = 0, clientHeight = 0 } = refDOMImgCover.value || {};
     const maxAttribute = clientWidth > clientHeight ? 'width' : 'height';
-    const maxValue = Math.max(clientWidth, clientHeight) * devicePixelRatio;
+    const maxValue = Math.round(Math.max(clientWidth, clientHeight) * devicePixelRatio);
     url = `${runtimeConfig.public.resourceOrigin}/${props.product.cover}?${maxAttribute}=${maxValue}`.replace('/uploads', '/api/file/uploads');
   }
   return url;
