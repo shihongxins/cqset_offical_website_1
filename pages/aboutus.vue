@@ -125,8 +125,7 @@ const submitSuggestion = async (event: FormSubmitEvent<ISuggestion>) => {
               </template>
             </UButton>
           </div>
-          <iframe class="absolute top-0 right-0 border-none w-full h-full overflow-hidden" :src="mapInfo.link"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe class="absolute top-0 right-0 border-none w-full h-full overflow-hidden" :src="mapInfo.link"></iframe>
         </div>
       </section>
       <section class="suggest">
