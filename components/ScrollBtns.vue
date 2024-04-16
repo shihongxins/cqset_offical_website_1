@@ -45,14 +45,14 @@ onBeforeUnmount(() => {
     v-show="visible">
     <UPopover mode="hover" :popper="popper" v-if="visibleBtnUp">
       <UButton icon="i-heroicons-chevron-up" size="sm" color="sky" variant="soft" v-bind="$attrs"
-        @click="handleScroll('up')"></UButton>
+        @click="handleScroll('up')" @touchend="handleScroll('up')"></UButton>
       <template #panel>
         <span class="p-2 truncate text-sm text-sky-500">滚动到顶部</span>
       </template>
     </UPopover>
     <UPopover mode="hover" :popper="popper" v-if="visibleBtnDown">
       <UButton icon="i-heroicons-chevron-down" size="sm" color="sky" variant="soft" v-bind="$attrs"
-        @click="handleScroll('down')"></UButton>
+        @click="handleScroll('down')" @touchend="handleScroll('down')"></UButton>
       <template #panel>
         <span class="p-2 truncate text-sm text-sky-500">滚动到底部</span>
       </template>
