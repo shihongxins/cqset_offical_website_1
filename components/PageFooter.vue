@@ -50,7 +50,7 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
               <NuxtLink to="/news#公司新闻">公司新闻</NuxtLink>
             </li>
             <li class="links__item">
-              <NuxtLink to="/news#内容管理">内容管理</NuxtLink>
+              <NuxtLink to="/management/#/management" target="_blank">内容管理</NuxtLink>
             </li>
           </ul>
         </CompDetails>
@@ -91,15 +91,23 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
         </CompDetails>
       </div>
       <p class="copyright">
-        <NuxtLink :to="contactInfomation.website" :title="contactInfomation.company">
+        <span class="block sm:inline">
           {{ contactInfomation.company }}
+        </span>
+        <span>
+          &copy;
+        </span>
+        <NuxtLink :to="contactInfomation.website" :title="contactInfomation.company">
+          cqset.com {{ currentYear }}
         </NuxtLink>
         <span>
-          Copyright &copy; {{ currentYear }}
+          All Rights Reserved.
         </span>
+        <br>
         <NuxtLink to="//beian.miit.gov.cn/#/Integrated/index" target="_blank">
           渝ICP备16002017号-1
         </NuxtLink>
+        <span class="px-1"></span>
         <NuxtLink to="https://beian.mps.gov.cn/#/query/webSearch?code=50010502503498" target="_blank">
           <img src="https://beian.mps.gov.cn/favicon.ico" alt="渝公网安备图标"
             class="inline-block w-4 h-4 mr-1 align-baseline">
