@@ -28,7 +28,8 @@ useState<IContactInfomation>('contact-infomation', () => ({
   company: '重庆南电科技股份有限公司',
   phone: '023-67652845',
   address: '重庆市江北区港安二路48号总部大楼 2，3 楼',
-  bMapLink: 'https://map.baidu.com/search/@11868070.3,3434963.955,19z?querytype=s&wd=%E9%87%8D%E5%BA%86%E5%8D%97%E7%94%B5%E7%A7%91%E6%8A%80%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8',
+  aMapLink: 'https://uri.amap.com/marker?position=106.605013,29.625999&name=重庆南电科技股份有限公司&callnative=1',
+  bMapLink: 'https://api.map.baidu.com/marker?location=29.625999,106.605013&coord_type=gcj02&title=重庆南电科技&content=重庆南电科技股份有限公司&output=html&src=webapp.baidu.openAPIdemo',
   website: 'https://www.cqset.com',
 }));
 </script>

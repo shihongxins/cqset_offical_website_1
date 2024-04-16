@@ -7,6 +7,27 @@ import type { IResponseData } from '~/types/request';
 const brief = useState<IBrief>('brief');
 const contactInfomation = useState<IContactInfomation>('contact-infomation');
 
+const mapType = ref<'amap' | 'bmap'>('amap');
+const toggleMapType = () => {
+  mapType.value = mapType.value === 'amap' ? 'bmap' : 'amap';
+}
+const mapInfo = computed(() => {
+  return {
+    amap: {
+      label: '切换百度地图',
+      color: 'orange',
+      link: contactInfomation.value.aMapLink,
+      icon: 'https://map.baidu.com/favicon.ico',
+    },
+    bmap: {
+      label: '切换高德地图',
+      color: 'sky',
+      link: contactInfomation.value.bMapLink,
+      icon: 'https://a.amap.com/pc/static/favicon.ico',
+    },
+  }[mapType.value];
+});
+
 const genSuggestion = (): ISuggestion => {
   return {
     content: '',
@@ -91,15 +112,21 @@ const submitSuggestion = async (event: FormSubmitEvent<ISuggestion>) => {
           </p>
           <p>
             <span>地址：</span>
-            <a :href="contactInfomation.bMapLink" target="_blank" rel="noopener noreferrer">
+            <a :href="mapInfo.link" target="_blank" rel="noopener noreferrer">
               {{ contactInfomation.address }}
             </a>
           </p>
         </address>
-        <div class="mt-9 border border-color-gray">
-          <ClientOnly>
-            <BaiduMap></BaiduMap>
-          </ClientOnly>
+        <div class="map__wrapper mt-9 border border-color-gray h-0 relative">
+          <div class="absolute -top-8 left-0">
+            <UButton :label="mapInfo.label" :color="mapInfo.color" @click="toggleMapType">
+              <template #leading>
+                <UAvatar :src="mapInfo.icon" size="2xs"></UAvatar>
+              </template>
+            </UButton>
+          </div>
+          <iframe class="absolute top-0 right-0 border-none w-full h-full overflow-hidden" :src="mapInfo.link"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </section>
       <section class="suggest">
@@ -126,3 +153,15 @@ const submitSuggestion = async (event: FormSubmitEvent<ISuggestion>) => {
     </article>
   </main>
 </template>
+
+<style>
+.map__wrapper {
+  padding-bottom: calc(4 / 3 * 100%);
+}
+
+@media screen and (min-width: 640px) {
+  .map__wrapper {
+    padding-bottom: calc(9 / 16 * 100%);
+  }
+}
+</style>

@@ -81,6 +81,7 @@ export interface IContactInfomation {
   company: string;
   phone: string;
   address: string;
+  aMapLink: string;
   bMapLink: string;
   website: string;
 }
