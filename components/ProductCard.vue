@@ -31,7 +31,8 @@ const productCoverURL = computed(() => {
     class="product--card w-full h-full overflow-hidden relative flex flex-col shadow cursor-pointer hover:scale-95 hover:shadow-xl group transform-gpu transition-all duration-500"
     :to="`/products/${product.id}`">
     <div class="product__cover--wrapper grow p-10 overflow-hidden bg-sky-600/10">
-      <img ref="refDOMImgCover" class="w-full h-full object-cover" :src="productCoverURL" :alt="product.title">
+      <img class="w-full h-full object-cover" loading="lazy" ref="refDOMImgCover" :src="productCoverURL"
+        :alt="product.title">
     </div>
     <h6
       class="product__name grow-0 px-8 w-full box-border leading-10 text-center truncate text-stone-600 bg-white group-hover:text-sky-600 transform-gpu transition-all duration-500">

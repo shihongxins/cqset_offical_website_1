@@ -38,7 +38,7 @@ onMounted(() => {
       <span class="news-info__datetime text-xs text-stone-400">{{ props.newsInfo.createdAt }}</span>
     </div>
     <div ref="refDOMImgCover" class="news-info__cover shrink-0 ml-2 rounded max-w-1/4 w-40 h-full overflow-hidden">
-      <img :src="coverURL" :alt="props.newsInfo.title" class="w-full h-full object-cover" />
+      <img class="w-full h-full object-cover" loading="lazy" :src="coverURL" :alt="props.newsInfo.title" />
     </div>
   </NuxtLink>
 </template>

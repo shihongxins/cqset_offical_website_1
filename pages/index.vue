@@ -125,7 +125,7 @@ const { data: top4NewsInfo } = useRequest<IArticle[]>('/news/list', {
           <li
             class="flex-1 m-4 rounded p-4 overflow-hidden flex md:basis-2/5 hover:shadow hover:bg-stone-400/20 transition-all transform-gpu duration-300"
             v-for="advantage in advantages" :key="advantage.title">
-            <img class="object-contain mr-4" :src="advantage.image" :alt="advantage.title">
+            <img class="object-contain mr-4" loading="lazy" :src="advantage.image" :alt="advantage.title">
             <div class="flex-1 overflow-hidden flex flex-col">
               <strong class="truncate underline decoration-sky-600 decoration-8">{{ advantage.title }}</strong>
               <p class="flex-1 overflow-hidden">{{ advantage.content }}</p>

@@ -56,7 +56,7 @@ const bannerImgFileURLs = computed(() => {
     <UCarousel ref="CompCarouselRef" :items="bannerImgFileURLs" v-slot="{ item }" :ui="{ item: 'basis-full' }"
       :indicators="bannerImgFileURLs.length > 1" @mouseenter="handleFocus(true)" @mouseleave="handleFocus(false)"
       @touchstart="handleFocus(true)" @touchend="handleFocus(false)">
-      <img :src="item" alt="banner" class="banner_img w-full h-full object-cover" />
+      <img class="banner_img w-full h-full object-cover" alt="banner" loading="lazy" :src="item" />
     </UCarousel>
   </div>
 </template>

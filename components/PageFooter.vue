@@ -109,8 +109,8 @@ const { data: visitedIPCount } = await useRequest('/info/ip', {
         </NuxtLink>
         <span class="px-1"></span>
         <NuxtLink to="https://beian.mps.gov.cn/#/query/webSearch?code=50010502503498" target="_blank">
-          <img src="https://beian.mps.gov.cn/favicon.ico" alt="渝公网安备图标"
-            class="inline-block w-4 h-4 mr-1 align-baseline">
+          <img src="https://beian.mps.gov.cn/favicon.ico" alt="渝公网安备图标" class="inline-block w-4 h-4 mr-1 align-baseline"
+            loading="lazy">
           <span>渝公网安备 50010502503498 号</span>
         </NuxtLink>
       </p>
