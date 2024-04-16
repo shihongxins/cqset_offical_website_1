@@ -43,8 +43,8 @@ const validateSuggestion = (formData: ISuggestion): FormError[] => {
     }
   }
   if (!(formData.email + formData.phone).trim()) {
-    errors.push({ path: 'phone', message: '请至少留下一直联系方式' });
-    errors.push({ path: 'email', message: '请至少留下一直联系方式' });
+    errors.push({ path: 'phone', message: '请至少留下一种联系方式' });
+    errors.push({ path: 'email', message: '请至少留下一种联系方式' });
   }
   return errors;
 }
