@@ -91,15 +91,15 @@ const { data: top4NewsInfo } = useRequest<IArticle[]>('/news/list', {
         <span>about us</span>
         <NuxtLink to="/aboutus">关于我们</NuxtLink>
       </h2>
-      <article class="company__brief--container flex flex-col md:gap-8 md:flex-row">
+      <article class="company__brief--container flex flex-col md:space-x-8 md:flex-row">
         <div class="company__brief__cover flex-1 overflow-hidden">
-          <img class="h-full object-cover" loading="lazy" ref="refDOMBriefCoverImg" :src="briefCoverImgURL"
+          <img class="w-full h-full object-cover" loading="lazy" ref="refDOMBriefCoverImg" :src="briefCoverImgURL"
             :alt="contactInfomation.company" />
         </div>
         <div
-          class="company__brief__content flex-1 overflow-hidden bg-sky-600/10 p-8 flex flex-col justify-center items-center text-sm md:text-base">
-          <p class="indent-8" v-html="brief.brief"></p>
-          <NuxtLink class="mt-4 font-semibold text-sky-500" to="/aboutus#公司简介">了解更多</NuxtLink>
+          class="company__brief__content flex-1 overflow-hidden bg-sky-600/10 flex flex-col justify-center items-center text-sm md:text-base">
+          <p class="m-8 indent-8" v-html="brief.brief"></p>
+          <NuxtLink class="my-4 font-semibold text-sky-500" to="/aboutus#公司简介">了解更多</NuxtLink>
         </div>
       </article>
     </section>
